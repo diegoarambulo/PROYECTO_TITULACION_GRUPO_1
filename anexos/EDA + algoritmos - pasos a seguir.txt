@@ -1,0 +1,20 @@
+=================EDA====================
+-uno solo dividido en 3 secciones (datos de voz, datos de texto e intenciones PLN, corpus de conocimiento/manuales para navegabilidad y apis)
+	-seccion PLN.- si se usara modelos hugging face o scikitlearn, el dataset pueden ser frases de usuarios, EDA debe analizar longitud de frases, frecuencia de palabras clave y balance de intenciones
+	-sistema experto manuales, si se usa RAG (generación aumentada por recuperación)*, los datasets son los manuales pdf o texto, el EDA consiste en revisar la estructura, si estan limpios, las informacion como tablas si se puede leer correctamente, que extension tienen
+	-API.- pura documentacion tecnica, como endpoint, capa de seguridad, manual de consumo, codigos de retorno, etc
+
+
+================ANALISIS DE MODELOS==========
+-comparar modelos pequeños (bert, openAI mini etc), frente a modelos mas robustos
+-de las comparaciones hay que evaluar precision, velocidad de respuesta, costos
+
+
+===============GLOSARIO
+-RAG ingenuo.- busca en el momento, facil y rapido
+-RAG avanzado.- busca pero mira en lo mas relevante segun palabras clave y toma como feedback la respuesta escogida, para pulir el aprendizaje
+-RAG modular.- flexible, tiene cada segemento separado y modificable, pero myor consumo computacional
+
+
+================anexos
+*https://www.ibm.com/es-es/think/topics/rag-techniques

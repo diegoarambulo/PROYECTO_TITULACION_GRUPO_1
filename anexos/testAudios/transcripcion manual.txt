@@ -1,0 +1,3 @@
+1.- necesito encontrar el documento de cedula de identidad del señor juan martinez
+2.- necesito me devuelvas todos los documentos que sean relevantes para un anexo de contrato de servicios
+3.- requiero todos los documentos cargados por el usuario juan piguave y que sean de la ultima semana
