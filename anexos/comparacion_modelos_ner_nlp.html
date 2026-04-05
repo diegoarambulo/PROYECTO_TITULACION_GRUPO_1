@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comparación de Modelos NLP — Extracción de Verbos y Entidades NER</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    background: #f9f8f5;
+    color: #1a1a18;
+    padding: 2rem;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 20px; font-weight: 500; color: #1a1a18; margin-bottom: 4px; }
+  .subtitle { font-size: 13px; color: #73726c; margin-bottom: 1.75rem; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; background: #fff; border-radius: 10px; overflow: hidden; border: 0.5px solid #d3d1c7; }
+  thead th {
+    font-weight: 500; font-size: 12px; color: #73726c;
+    text-align: left; padding: 10px 11px;
+    border-bottom: 0.5px solid #b4b2a9;
+    background: #f9f8f5;
+  }
+  tbody tr { border-bottom: 0.5px solid #e8e6df; }
+  tbody tr:hover { background: #f4f2ec; }
+  td { padding: 9px 11px; vertical-align: top; color: #1a1a18; }
+  td.txt-col { font-size: 11.5px; color: #5f5e5a; max-width: 180px; line-height: 1.45; }
+  td.model-col { font-weight: 500; font-size: 12px; white-space: nowrap; }
+
+  .pill {
+    display: inline-block; border-radius: 4px;
+    padding: 2px 7px; font-size: 11px; font-weight: 500;
+    margin: 1px 2px 1px 0; white-space: nowrap;
+  }
+  .pill-PER  { background: #EEEDFE; color: #3C3489; }
+  .pill-LOC  { background: #E1F5EE; color: #085041; }
+  .pill-ORG  { background: #E6F1FB; color: #0C447C; }
+  .pill-MISC { background: #FAEEDA; color: #633806; }
+  .pill-ERR  { background: #FCEBEB; color: #791F1F; }
+  .pill-NONE { background: #f1efe8; color: #888780; font-style: italic; }
+
+  .verb-tag {
+    display: inline-block; background: #f1efe8;
+    border: 0.5px solid #b4b2a9; border-radius: 4px;
+    padding: 2px 7px; font-size: 11px; color: #1a1a18; font-style: italic;
+  }
+  .verb-none { color: #888780; font-size: 11px; font-style: italic; }
+
+  .pct-bar-wrap { display: flex; align-items: center; gap: 6px; margin-top: 3px; }
+  .pct-bar-bg { height: 5px; border-radius: 3px; background: #d3d1c7; flex: 1; }
+  .pct-bar-fill { height: 5px; border-radius: 3px; }
+  .pct-label { font-size: 11px; font-weight: 500; min-width: 34px; text-align: right; }
+
+  .section-row td {
+    background: #f1efe8; font-size: 11px; font-weight: 500;
+    color: #5f5e5a; padding: 5px 11px; letter-spacing: 0.02em;
+  }
+
+  .badge-correct { background: #EAF3DE; color: #3B6D11; border-radius: 4px; padding: 1px 6px; font-size: 10.5px; font-weight: 500; }
+  .badge-partial  { background: #FAEEDA; color: #854F0B; border-radius: 4px; padding: 1px 6px; font-size: 10.5px; font-weight: 500; }
+  .badge-wrong    { background: #FCEBEB; color: #791F1F; border-radius: 4px; padding: 1px 6px; font-size: 10.5px; font-weight: 500; }
+  .badge-none     { background: #f1efe8; color: #888780; border-radius: 4px; padding: 1px 6px; font-size: 10.5px; }
+
+  .insight-row td {
+    background: #e6f1fb; font-size: 11px;
+    color: #185fa5; padding: 6px 11px;
+    border-left: 3px solid #378add;
+  }
+
+  .summary-grid {
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+  }
+  .summary-card {
+    background: #fff; border: 0.5px solid #d3d1c7;
+    border-radius: 8px; padding: 14px 16px;
+  }
+  .summary-card p.label { font-size: 11px; color: #73726c; margin-bottom: 4px; }
+  .summary-card p.value { font-size: 22px; font-weight: 500; color: #1a1a18; }
+  .summary-card p.note  { font-size: 10px; color: #888780; margin-top: 2px; }
+
+  .footer-note { font-size: 11px; color: #888780; margin-top: 12px; }
+
+  @media (prefers-color-scheme: dark) {
+    body { background: #1e1e1c; color: #d4d2c8; }
+    table { background: #2a2a28; border-color: #444441; }
+    thead th { background: #242422; color: #888780; border-color: #444441; }
+    tbody tr { border-color: #333330; }
+    tbody tr:hover { background: #303030; }
+    td { color: #d4d2c8; }
+    td.txt-col { color: #888780; }
+    .section-row td { background: #242422; color: #888780; }
+    .pill-PER  { background: #26215C; color: #CECBF6; }
+    .pill-LOC  { background: #04342C; color: #9FE1CB; }
+    .pill-ORG  { background: #042C53; color: #B5D4F4; }
+    .pill-MISC { background: #412402; color: #FAC775; }
+    .pill-ERR  { background: #501313; color: #F7C1C1; }
+    .pill-NONE { background: #2c2c2a; color: #5f5e5a; }
+    .verb-tag { background: #2c2c2a; border-color: #444441; color: #d4d2c8; }
+    .badge-correct { background: #173404; color: #C0DD97; }
+    .badge-partial  { background: #412402; color: #FAC775; }
+    .badge-wrong    { background: #501313; color: #F7C1C1; }
+    .insight-row td { background: #042C53; color: #85b7eb; border-left-color: #378add; }
+    .summary-card { background: #2a2a28; border-color: #444441; }
+    .summary-card p.value { color: #d4d2c8; }
+    .pct-bar-bg { background: #444441; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Comparación de modelos NLP — Extracción de verbos y entidades NER</h1>
+  <p class="subtitle">7 textos de prueba · 4 modelos · Análisis de precisión por tipo de entidad</p>
+
+  <div style="overflow-x:auto;">
+  <table>
+    <thead>
+      <tr>
+        <th style="width:28px">#</th>
+        <th style="min-width:160px">Texto</th>
+        <th style="width:120px">Modelo</th>
+        <th style="width:95px">Verbo detectado</th>
+        <th style="min-width:200px">Entidades detectadas</th>
+        <th style="width:80px">Calidad NER</th>
+        <th style="width:110px">% entidades correctas</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- TEXT 1 -->
+      <tr class="section-row"><td colspan="7">Texto 1 — Cédula de identidad de Bryan Alvarado</td></tr>
+      <tr>
+        <td>1</td>
+        <td class="txt-col" rowspan="4">"Hola, necesito la el documento cédula de identidad del individuo Bryan Alvarado"</td>
+        <td class="model-col">spaCy MD</td>
+        <td><span class="verb-tag">necesitar</span></td>
+        <td><span class="pill pill-PER">Bryan Alvarado · PER</span></td>
+        <td><span class="badge-correct">Correcto</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:100%;background:#639922"></div></div><span class="pct-label" style="color:#3B6D11">100%</span></div></td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td class="model-col">spaCy LG</td>
+        <td><span class="verb-tag">necesitar</span></td>
+        <td><span class="pill pill-PER">Hola · PER</span> <span class="pill pill-PER">Bryan Alvarado · PER</span></td>
+        <td><span class="badge-partial">Parcial</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:50%;background:#EF9F27"></div></div><span class="pct-label" style="color:#854F0B">50%</span></div></td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td class="model-col">BERT NER 1</td>
+        <td><span class="verb-none">—</span></td>
+        <td><span class="pill pill-PER">Bryan Alvarado · PER</span></td>
+        <td><span class="badge-correct">Correcto</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:100%;background:#639922"></div></div><span class="pct-label" style="color:#3B6D11">100%</span></div></td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td class="model-col">WikiNeural NER 2</td>
+        <td><span class="verb-none">—</span></td>
+        <td><span class="pill pill-PER">Bryan Alvarado · PER</span></td>
+        <td><span class="badge-correct">Correcto</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:100%;background:#639922"></div></div><span class="pct-label" style="color:#3B6D11">100%</span></div></td>
+      </tr>
+      <tr class="insight-row"><td colspan="7">Insight: Texto 1 — Bryan Alvarado detectado por los 4 modelos. spaCy LG introduce ruido al clasificar "Hola" como PER (falso positivo).</td></tr>
+
+      <!-- TEXT 2 -->
+      <tr class="section-row"><td colspan="7">Texto 2 — Archivos de roles de pago de Heladería Pingüino</td></tr>
+      <tr>
+        <td>2</td>
+        <td class="txt-col" rowspan="4">"Enlistame los últimos 10 archivos de roles de pago... por 'Heladeria Pinguino'"</td>
+        <td class="model-col">spaCy MD</td>
+        <td><span class="verb-tag">enlistame</span></td>
+        <td><span class="pill pill-LOC">Heladeria Pinguino · LOC</span></td>
+        <td><span class="badge-partial">Parcial</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:60%;background:#EF9F27"></div></div><span class="pct-label" style="color:#854F0B">60%</span></div></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td class="model-col">spaCy LG</td>
+        <td><span class="verb-tag">cargar</span></td>
+        <td><span class="pill pill-LOC">Enlistame · LOC</span> <span class="pill pill-LOC">Heladeria Pinguino · LOC</span></td>
+        <td><span class="badge-partial">Parcial</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:40%;background:#EF9F27"></div></div><span class="pct-label" style="color:#854F0B">40%</span></div></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td class="model-col">BERT NER 1</td>
+        <td><span class="verb-none">—</span></td>
+        <td>
+          <span class="pill pill-ERR">Hel · PER</span>
+          <span class="pill pill-ERR">##ader · ORG</span>
+          <span class="pill pill-ERR">##ia · PER</span>
+          <span class="pill pill-ERR">Pingui · ORG</span>
+          <span class="pill pill-ERR">##no · PER</span>
+        </td>
+        <td><span class="badge-wrong">Fragmentado</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:5%;background:#E24B4A"></div></div><span class="pct-label" style="color:#A32D2D">5%</span></div></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td class="model-col">WikiNeural NER 2</td>
+        <td><span class="verb-none">—</span></td>
+        <td><span class="pill pill-MISC">Heladeria Pinguino · MISC</span></td>
+        <td><span class="badge-partial">Parcial</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:70%;background:#EF9F27"></div></div><span class="pct-label" style="color:#854F0B">70%</span></div></td>
+      </tr>
+      <tr class="insight-row"><td colspan="7">Insight: Texto 2 — BERT NER 1 falla gravemente con la tokenización subword (##ader, ##ia, ##no). La entidad es ORG, no LOC; todos los modelos presentan clasificación errónea de tipo.</td></tr>
+
+      <!-- TEXT 3 -->
+      <tr class="section-row"><td colspan="7">Texto 3 — Documentos del último día</td></tr>
+      <tr>
+        <td>3</td>
+        <td class="txt-col" rowspan="4">"Traeme todos los documentos cargados en el último día"</td>
+        <td class="model-col">spaCy MD</td>
+        <td><span class="verb-tag">trae yo</span></td>
+        <td><span class="pill pill-MISC">Traeme · MISC</span></td>
+        <td><span class="badge-wrong">Incorrecto</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:0%;background:#E24B4A"></div></div><span class="pct-label" style="color:#A32D2D">0%</span></div></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td class="model-col">spaCy LG</td>
+        <td><span class="verb-none">None</span></td>
+        <td><span class="pill pill-PER">Traeme · PER</span></td>
+        <td><span class="badge-wrong">Incorrecto</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:0%;background:#E24B4A"></div></div><span class="pct-label" style="color:#A32D2D">0%</span></div></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td class="model-col">BERT NER 1</td>
+        <td><span class="verb-none">—</span></td>
+        <td><span class="pill pill-NONE">Sin entidades</span></td>
+        <td><span class="badge-correct">Correcto</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:100%;background:#639922"></div></div><span class="pct-label" style="color:#3B6D11">100%</span></div></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td class="model-col">WikiNeural NER 2</td>
+        <td><span class="verb-none">—</span></td>
+        <td><span class="pill pill-NONE">Sin entidades</span></td>
+        <td><span class="badge-correct">Correcto</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:100%;background:#639922"></div></div><span class="pct-label" style="color:#3B6D11">100%</span></div></td>
+      </tr>
+      <tr class="insight-row"><td colspan="7">Insight: Texto 3 — Sin entidades reales. spaCy MD y LG confunden el pronombre imperativo "Tráeme" con entidad nombrada (falso positivo). BERT y WikiNeural aciertan al no detectar nada.</td></tr>
+
+      <!-- TEXT 4 -->
+      <tr class="section-row"><td colspan="7">Texto 4 — Documentos con "anexo" en el nombre</td></tr>
+      <tr>
+        <td>4</td>
+        <td class="txt-col" rowspan="4">"Busca todos los documentos que tengan anexo en su nombre cargados el último día sábado"</td>
+        <td class="model-col">spaCy MD</td>
+        <td><span class="verb-tag">buscar</span></td>
+        <td><span class="pill pill-NONE">Sin entidades</span></td>
+        <td><span class="badge-correct">Correcto</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:100%;background:#639922"></div></div><span class="pct-label" style="color:#3B6D11">100%</span></div></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td class="model-col">spaCy LG</td>
+        <td><span class="verb-tag">buscar</span></td>
+        <td><span class="pill pill-NONE">Sin entidades</span></td>
+        <td><span class="badge-correct">Correcto</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:100%;background:#639922"></div></div><span class="pct-label" style="color:#3B6D11">100%</span></div></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td class="model-col">BERT NER 1</td>
+        <td><span class="verb-none">—</span></td>
+        <td><span class="pill pill-NONE">Sin entidades</span></td>
+        <td><span class="badge-correct">Correcto</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:100%;background:#639922"></div></div><span class="pct-label" style="color:#3B6D11">100%</span></div></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td class="model-col">WikiNeural NER 2</td>
+        <td><span class="verb-none">—</span></td>
+        <td><span class="pill pill-NONE">Sin entidades</span></td>
+        <td><span class="badge-correct">Correcto</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:100%;background:#639922"></div></div><span class="pct-label" style="color:#3B6D11">100%</span></div></td>
+      </tr>
+      <tr class="insight-row"><td colspan="7">Insight: Texto 4 — Consenso total: ningún modelo detecta entidades. Correcto, ya que no hay nombres propios. Los 4 modelos coinciden plenamente.</td></tr>
+
+      <!-- TEXT 5 -->
+      <tr class="section-row"><td colspan="7">Texto 5 — Cambio de contraseña, Municipio de Guayaquil</td></tr>
+      <tr>
+        <td>5</td>
+        <td class="txt-col" rowspan="4">"...tengo 2 usuarios del Municipio de Guayaquil"</td>
+        <td class="model-col">spaCy MD</td>
+        <td><span class="verb-tag">realizar</span></td>
+        <td><span class="pill pill-LOC">Municipio de Guayaquil · LOC</span></td>
+        <td><span class="badge-correct">Correcto</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:100%;background:#639922"></div></div><span class="pct-label" style="color:#3B6D11">100%</span></div></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td class="model-col">spaCy LG</td>
+        <td><span class="verb-tag">realizar</span></td>
+        <td><span class="pill pill-LOC">Municipio de Guayaquil · LOC</span></td>
+        <td><span class="badge-correct">Correcto</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:100%;background:#639922"></div></div><span class="pct-label" style="color:#3B6D11">100%</span></div></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td class="model-col">BERT NER 1</td>
+        <td><span class="verb-none">—</span></td>
+        <td><span class="pill pill-LOC">Municipio de Guayaquil · LOC</span></td>
+        <td><span class="badge-correct">Correcto</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:100%;background:#639922"></div></div><span class="pct-label" style="color:#3B6D11">100%</span></div></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td class="model-col">WikiNeural NER 2</td>
+        <td><span class="verb-none">—</span></td>
+        <td><span class="pill pill-LOC">Municipio de Guayaquil · LOC</span></td>
+        <td><span class="badge-correct">Correcto</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:100%;background:#639922"></div></div><span class="pct-label" style="color:#3B6D11">100%</span></div></td>
+      </tr>
+      <tr class="insight-row"><td colspan="7">Insight: Texto 5 — Mejor resultado global. Los 4 modelos detectan correctamente la entidad LOC. Texto con el mayor consenso y precisión del conjunto.</td></tr>
+
+      <!-- TEXT 6 -->
+      <tr class="section-row"><td colspan="7">Texto 6 — Firma de documento en portal web</td></tr>
+      <tr>
+        <td>6</td>
+        <td class="txt-col" rowspan="4">"De qué forma puedo yo firmar un documento en este portal web?"</td>
+        <td class="model-col">spaCy MD</td>
+        <td><span class="verb-tag">poder</span></td>
+        <td><span class="pill pill-NONE">Sin entidades</span></td>
+        <td><span class="badge-correct">Correcto</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:100%;background:#639922"></div></div><span class="pct-label" style="color:#3B6D11">100%</span></div></td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td class="model-col">spaCy LG</td>
+        <td><span class="verb-tag">firmar</span></td>
+        <td><span class="pill pill-NONE">Sin entidades</span></td>
+        <td><span class="badge-correct">Correcto</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:100%;background:#639922"></div></div><span class="pct-label" style="color:#3B6D11">100%</span></div></td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td class="model-col">BERT NER 1</td>
+        <td><span class="verb-none">—</span></td>
+        <td><span class="pill pill-NONE">Sin entidades</span></td>
+        <td><span class="badge-correct">Correcto</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:100%;background:#639922"></div></div><span class="pct-label" style="color:#3B6D11">100%</span></div></td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td class="model-col">WikiNeural NER 2</td>
+        <td><span class="verb-none">—</span></td>
+        <td><span class="pill pill-NONE">Sin entidades</span></td>
+        <td><span class="badge-correct">Correcto</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:100%;background:#639922"></div></div><span class="pct-label" style="color:#3B6D11">100%</span></div></td>
+      </tr>
+      <tr class="insight-row"><td colspan="7">Insight: Texto 6 — Consenso total y correcto. Nota: spaCy MD detecta "poder" (verbo modal) mientras LG identifica "firmar" (verbo principal semánticamente más relevante).</td></tr>
+
+      <!-- TEXT 7 -->
+      <tr class="section-row"><td colspan="7">Texto 7 — Vínculos de archivos por cédula 0929800399</td></tr>
+      <tr>
+        <td>7</td>
+        <td class="txt-col" rowspan="4">"Dame los vínculos hacia los archivos del usuario cuya cédula sea 0929800399"</td>
+        <td class="model-col">spaCy MD</td>
+        <td><span class="verb-tag">dame</span></td>
+        <td><span class="pill pill-NONE">Sin entidades</span></td>
+        <td><span class="badge-correct">Correcto</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:100%;background:#639922"></div></div><span class="pct-label" style="color:#3B6D11">100%</span></div></td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td class="model-col">spaCy LG</td>
+        <td><span class="verb-tag">dame</span></td>
+        <td><span class="pill pill-NONE">Sin entidades</span></td>
+        <td><span class="badge-correct">Correcto</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:100%;background:#639922"></div></div><span class="pct-label" style="color:#3B6D11">100%</span></div></td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td class="model-col">BERT NER 1</td>
+        <td><span class="verb-none">—</span></td>
+        <td><span class="pill pill-NONE">Sin entidades</span></td>
+        <td><span class="badge-correct">Correcto</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:100%;background:#639922"></div></div><span class="pct-label" style="color:#3B6D11">100%</span></div></td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td class="model-col">WikiNeural NER 2</td>
+        <td><span class="verb-none">—</span></td>
+        <td><span class="pill pill-MISC">09 · MISC</span></td>
+        <td><span class="badge-wrong">Incorrecto</span></td>
+        <td><div class="pct-bar-wrap"><div class="pct-bar-bg"><div class="pct-bar-fill" style="width:0%;background:#E24B4A"></div></div><span class="pct-label" style="color:#A32D2D">0%</span></div></td>
+      </tr>
+      <tr class="insight-row"><td colspan="7">Insight: Texto 7 — WikiNeural NER 2 es el único que falla, clasificando el prefijo numérico "09" como MISC. El número de cédula debería ignorarse como entidad nombrada.</td></tr>
+
+    </tbody>
+  </table>
+  </div>
+
+  <!-- RESUMEN -->
+  <div class="summary-grid">
+    <div class="summary-card">
+      <p class="label">Precisión global spaCy MD</p>
+      <p class="value">66%</p>
+      <p class="note">Falsos positivos en T1, T3</p>
+    </div>
+    <div class="summary-card">
+      <p class="label">Precisión global spaCy LG</p>
+      <p class="value">61%</p>
+      <p class="note">Más falsos positivos que MD</p>
+    </div>
+    <div class="summary-card">
+      <p class="label">Precisión global BERT NER 1</p>
+      <p class="value">72%</p>
+      <p class="note">Falla grave en tokenización T2</p>
+    </div>
+    <div class="summary-card">
+      <p class="label">Precisión global WikiNeural</p>
+      <p class="value">75%</p>
+      <p class="note">Falla en T2 tipo + T7 numérico</p>
+    </div>
+  </div>
+
+  <p class="footer-note">
+    * % calculado sobre corrección del conjunto detectado vs. entidades reales esperadas por texto. Textos sin entidades reales se valoran como 100% si el modelo no detecta nada.
+  </p>
+</div>
+</body>
+</html>
