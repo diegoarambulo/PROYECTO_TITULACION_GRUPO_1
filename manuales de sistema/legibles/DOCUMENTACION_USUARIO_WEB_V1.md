@@ -462,9 +462,6 @@ Los modelos presentados cubren diferentes necesidades operativas:
 Esto permite a la empresa adaptarse a distintos escenarios de uso, desde transporte ejecutivo hasta logística operativa.
 
 ---
-
-Si quieres, puedo adaptar esta sección a **formato aún más técnico (tipo ficha API o JSON para tu sistema)** o alinearla exactamente al diseño de tu PDF original.
-
 [1]: https://www.iseecars.com/compare/toyota-corolla-vs-chevrolet-spark?utm_source=chatgpt.com "Toyota Corolla vs. Chevrolet Spark - iSeeCars.com"
 [2]: https://www.carsized.com/en/cars/compare/chevrolet-spark-2012-5-door-hatchback-vs-ford-ranger-2011-4-door-pickup/?utm_source=chatgpt.com "Dimensions: Chevrolet Spark 2012-2014 vs. Ford Ranger 2011-2019"
 [3]: https://www.chevrolet.com.ec/content/dam/chevrolet/south-america/ecuador/espanol/index/cars/spark-gt/02-pdfs/ficha-tecnica-spark-gt-abril-v2.pdf?utm_source=chatgpt.com "CHEVROLET SPARK GT"
