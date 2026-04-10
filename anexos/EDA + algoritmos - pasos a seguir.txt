@@ -18,3 +18,9 @@
 
 ================anexos
 *https://www.ibm.com/es-es/think/topics/rag-techniques
+
+Análisis de distribuciones de variables.
+Identificación de correlaciones.
+Detección de valores atípicos (outliers).
+Análisis de valores faltantes (missing values).
+Estadísticas descriptivas principales.
