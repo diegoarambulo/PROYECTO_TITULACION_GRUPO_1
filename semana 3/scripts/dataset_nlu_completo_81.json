@@ -1,0 +1,1019 @@
+{
+  "catalogos": {
+    "tipo": {
+      "S": "solicitud",
+      "N": "navegación de sistema"
+    },
+    "estado": {
+      "D": "depurado"
+    },
+    "intenciones": {
+      "N": "navegación",
+      "DD": "descarga de documento",
+      "LD": "consulta/listado de documentos"
+    },
+    "entidades": {
+      "PER": "Persona",
+      "ORG": "Organizacion",
+      "LOC": "Ubicacion",
+      "ROL": "Rol de sistema",
+      "DOC": "Tipo de documento"
+    }
+  },
+  "dataSetOrdenes": {
+    "001": {
+      "tipo": "S",
+      "texto": "devuelveme el documento de identificación del usuario Juan Ramirez",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar documento de identificacion del usuario Juan Ramirez",
+      "entidades": [
+        {
+          "texto": "documento de identificacion",
+          "tipo": "DOC"
+        },
+        {
+          "texto": "Juan Ramirez",
+          "tipo": "PER"
+        }
+      ]
+    },
+    "002": {
+      "tipo": "N",
+      "texto": "donde puedo cambiar la contraseña del usuario en el sistema",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "donde cambiar la contrasena del usuario en el sistema",
+      "entidades": []
+    },
+    "003": {
+      "tipo": "S",
+      "texto": "enlistame los ultimos documentos cargados en la ultima semana, ultimos 7 siete dias",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar documentos cargados en los ultimos 7 dias",
+      "entidades": [
+        {
+          "texto": "documentos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "004": {
+      "tipo": "S",
+      "texto": "dame los expedientes cargados el dia de ayer",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar expedientes cargados el dia de ayer",
+      "entidades": [
+        {
+          "texto": "expedientes",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "005": {
+      "tipo": "N",
+      "texto": "en que parte del sistema esta la opción de cargar documentos?",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "donde esta la opcion de cargar documentos",
+      "entidades": []
+    },
+    "006": {
+      "tipo": "S",
+      "texto": "comparteme las ultimas guias de revision cargados por el usuario Manuel Ruiz$$ 12345",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar guias de revision cargadas por el usuario Manuel Ruiz",
+      "entidades": [
+        {
+          "texto": "guias de revision",
+          "tipo": "DOC"
+        },
+        {
+          "texto": "Manuel Ruiz",
+          "tipo": "PER"
+        }
+      ]
+    },
+    "007": {
+      "tipo": "S",
+      "texto": "dam3 los archivooooooooos de contratos c4rgados del 1 de enero del 2026 al 4 de marzo del 2026, pero yaaaaaa!!!$$$$",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar archivos de contratos cargados del 2026-01-01 al 2026-03-04",
+      "entidades": [
+        {
+          "texto": "archivos de contratos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "008": {
+      "tipo": "S",
+      "texto": "necesito los documentos que tengan etiquetados perteneciente a la ciudad de guayaquil, del año 2026",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar documentos etiquetados de la ciudad de Guayaquil del 2026",
+      "entidades": [
+        {
+          "texto": "documentos",
+          "tipo": "DOC"
+        },
+        {
+          "texto": "Guayaquil",
+          "tipo": "LOC"
+        }
+      ]
+    },
+    "009": {
+      "tipo": "S",
+      "texto": "muéstrame todos los documentos asociados al usuario Carlos Mendoza",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar documentos asociados al usuario Carlos Mendoza",
+      "entidades": [
+        {
+          "texto": "documentos",
+          "tipo": "DOC"
+        },
+        {
+          "texto": "Carlos Mendoza",
+          "tipo": "PER"
+        }
+      ]
+    },
+    "010": {
+      "tipo": "S",
+      "texto": "necesito los reportes generados durante el mes de febrero del 2026",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar reportes generados durante febrero 2026",
+      "entidades": [
+        {
+          "texto": "reportes",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "011": {
+      "tipo": "S",
+      "texto": "lista los archivos PDF cargados en el sistema en los últimos 30 días",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar archivos pdf cargados en los ultimos 30 dias",
+      "entidades": [
+        {
+          "texto": "archivos pdf",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "012": {
+      "tipo": "S",
+      "texto": "dame los documentos que contengan la palabra contrato en el título",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar documentos que contienen la palabra contrato en el titulo",
+      "entidades": [
+        {
+          "texto": "documentos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "013": {
+      "tipo": "S",
+      "texto": "recupera los expedientes relacionados con el cliente Maria Lopez desde el 2025",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar expedientes relacionados con el cliente Maria Lopez desde 2025",
+      "entidades": [
+        {
+          "texto": "expedientes",
+          "tipo": "DOC"
+        },
+        {
+          "texto": "Maria Lopez",
+          "tipo": "PER"
+        }
+      ]
+    },
+    "014": {
+      "tipo": "S",
+      "texto": "quiero ver los documentos eliminados recientemente en el sistemaaaaaaaaaaaaaaaa, yaaaaaaaaa",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar documentos eliminados recientemente",
+      "entidades": [
+        {
+          "texto": "documentos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "015": {
+      "tipo": "S",
+      "texto": "búscame los archivos cargados por el usuario Pedro Sanchez del dia de hoy??&$#",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar archivos cargados por el usuario Pedro Sanchez hoy",
+      "entidades": [
+        {
+          "texto": "archivos",
+          "tipo": "DOC"
+        },
+        {
+          "texto": "Pedro Sanchez",
+          "tipo": "PER"
+        }
+      ]
+    },
+    "016": {
+      "tipo": "S",
+      "texto": "obtén los documentos clasificados como confidenciales del año 2025, huyhuy tangamndapio",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar documentos confidenciales del 2025",
+      "entidades": [
+        {
+          "texto": "documentos confidenciales",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "017": {
+      "tipo": "S",
+      "texto": "descárgame el documento de identidad del usuario Pedro Torres",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar documento de identidad del usuario Pedro Torres",
+      "entidades": [
+        {
+          "texto": "documento de identidad",
+          "tipo": "DOC"
+        },
+        {
+          "texto": "Pedro Torres",
+          "tipo": "PER"
+        }
+      ]
+    },
+    "018": {
+      "tipo": "S",
+      "texto": "quiero bajar los contratos firmados en marzo del 2026",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar contratos firmados en 2026-03",
+      "entidades": [
+        {
+          "texto": "contratos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "019": {
+      "tipo": "S",
+      "texto": "lista todos los documentos cargados hoy en el sistema",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar documentos cargados hoy",
+      "entidades": [
+        {
+          "texto": "documentos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "020": {
+      "tipo": "S",
+      "texto": "muéstrame los archivos asociados al cliente Ana Gomez desde enero",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar archivos asociados al cliente Ana Gomez desde enero",
+      "entidades": [
+        {
+          "texto": "archivos",
+          "tipo": "DOC"
+        },
+        {
+          "texto": "Ana Gomez",
+          "tipo": "PER"
+        }
+      ]
+    },
+    "021": {
+      "tipo": "N",
+      "texto": "donde puedo ver los documentos cargados en el sistema",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "donde ver los documentos cargados",
+      "entidades": []
+    },
+    "022": {
+      "tipo": "N",
+      "texto": "en que sección se descargan los archivos del sistema",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "donde descargar archivos en el sistema",
+      "entidades": []
+    },
+    "023": {
+      "tipo": "S",
+      "texto": "descargame los reportes financieros del año 2025!!!",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar reportes financieros del 2025",
+      "entidades": [
+        {
+          "texto": "reportes financieros",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "024": {
+      "tipo": "S",
+      "texto": "necesito los documentos pdf generados en los ultimos 15 dias",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar documentos pdf generados en los ultimos 15 dias",
+      "entidades": [
+        {
+          "texto": "documentos pdf",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "025": {
+      "tipo": "N",
+      "texto": "como accedo a la opcion de listar documentos",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "como acceder a la opcion de listar documentos",
+      "entidades": []
+    },
+    "026": {
+      "tipo": "N",
+      "texto": "donde esta el modulo de gestion documental dentro del sistema",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "donde esta el modulo de gestion documental",
+      "entidades": []
+    },
+    "027": {
+      "tipo": "S",
+      "texto": "bajame los archivos de contratos del cliente Luis Perez",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar archivos de contratos del cliente Luis Perez",
+      "entidades": [
+        {
+          "texto": "archivos de contratos",
+          "tipo": "DOC"
+        },
+        {
+          "texto": "Luis Perez",
+          "tipo": "PER"
+        }
+      ]
+    },
+    "028": {
+      "tipo": "S",
+      "texto": "lista los documentos etiquetados como legales en el sistema",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar documentos etiquetados como legales",
+      "entidades": [
+        {
+          "texto": "documentos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "029": {
+      "tipo": "N",
+      "texto": "como puedo descargar documentos desde la plataforma?",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "como descargar documentos desde la plataforma",
+      "entidades": []
+    },
+    "030": {
+      "tipo": "S",
+      "texto": "descargame los archivos subidos ayer por el usuario admin",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar archivos subidos ayer por el usuario admin",
+      "entidades": [
+        {
+          "texto": "archivos",
+          "tipo": "DOC"
+        },
+        {
+          "texto": "admin",
+          "tipo": "ROL"
+        }
+      ]
+    },
+    "031": {
+      "tipo": "S",
+      "texto": "muestrame los documentos con la palabra factura en el nombre",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar documentos con la palabra factura en el nombre",
+      "entidades": [
+        {
+          "texto": "documentos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "032": {
+      "tipo": "N",
+      "texto": "donde encuentro los documentos eliminados",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "donde encontrar documentos eliminados",
+      "entidades": []
+    },
+    "033": {
+      "tipo": "S",
+      "texto": "descargar los documentos confidenciales del sistema $$%%",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar documentos confidenciales",
+      "entidades": [
+        {
+          "texto": "documentos confidenciales",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "034": {
+      "tipo": "S",
+      "texto": "listame todos los archivos cargados por Maria Lopez en 2026",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar archivos cargados por Maria Lopez en 2026",
+      "entidades": [
+        {
+          "texto": "archivos",
+          "tipo": "DOC"
+        },
+        {
+          "texto": "Maria Lopez",
+          "tipo": "PER"
+        }
+      ]
+    },
+    "035": {
+      "tipo": "N",
+      "texto": "en que parte puedo buscar documentos por usuario",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "donde buscar documentos por usuario",
+      "entidades": []
+    },
+    "036": {
+      "tipo": "S",
+      "texto": "necesito descargar los expedientes del cliente Jorge Ramirez",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar expedientes del cliente Jorge Ramirez",
+      "entidades": [
+        {
+          "texto": "expedientes",
+          "tipo": "DOC"
+        },
+        {
+          "texto": "Jorge Ramirez",
+          "tipo": "PER"
+        }
+      ]
+    },
+    "037": {
+      "tipo": "S",
+      "texto": "lista los documentos creados en los ultimos 3 meses",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar documentos creados en los ultimos 3 meses",
+      "entidades": [
+        {
+          "texto": "documentos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "038": {
+      "tipo": "N",
+      "texto": "como se accede al historial de documentos en el sistema",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "como acceder al historial de documentos",
+      "entidades": []
+    },
+    "039": {
+      "tipo": "S",
+      "texto": "descargame los archivos del 2024 rapidooooo!!!",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar archivos del 2024",
+      "entidades": [
+        {
+          "texto": "archivos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "040": {
+      "tipo": "S",
+      "texto": "muestra los documentos relacionados con auditorias internas",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar documentos relacionados con auditorias internas",
+      "entidades": [
+        {
+          "texto": "documentos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "041": {
+      "tipo": "N",
+      "texto": "donde se encuentra la opcion para ver reportes documentales",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "donde ver reportes documentales",
+      "entidades": []
+    },
+    "042": {
+      "tipo": "S",
+      "texto": "bajame los documentostostostostos ==....=== del usuario Carla Ruiz del dia de hoy",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar documentos del usuario Carla Ruiz del dia de hoy",
+      "entidades": [
+        {
+          "texto": "documentos",
+          "tipo": "DOC"
+        },
+        {
+          "texto": "Carla Ruiz",
+          "tipo": "PER"
+        }
+      ]
+    },
+    "043": {
+      "tipo": "S",
+      "texto": "lista los documentos con etiquetas de recursos humanos",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar documentos con etiquetas de recursos humanos",
+      "entidades": [
+        {
+          "texto": "documentos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "044": {
+      "tipo": "N",
+      "texto": "como navegar entre los modulos del sistema documental",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "como navegar entre los modulos del sistema documental",
+      "entidades": []
+    },
+    "045": {
+      "tipo": "S",
+      "texto": "descargar los archivos cargados en febrero del 2025 #$%",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar archivos cargados en 2025-02",
+      "entidades": [
+        {
+          "texto": "archivos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "046": {
+      "tipo": "S",
+      "texto": "mostrar documentos asociados al departamento legal",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar documentos asociados al departamento legal",
+      "entidades": [
+        {
+          "texto": "documentos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "047": {
+      "tipo": "N",
+      "texto": "en donde puedo encontrar los documentos confidenciales",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "donde encontrar documentos confidenciales",
+      "entidades": []
+    },
+    "048": {
+      "tipo": "S",
+      "texto": "descargame los archivos pdf del sistema del mes actual",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar archivos pdf del mes actual",
+      "entidades": [
+        {
+          "texto": "archivos pdf",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "049": {
+      "tipo": "S",
+      "texto": "lista los documentos cargados por el usuario root en enero",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar documentos cargados por el usuario root en enero",
+      "entidades": [
+        {
+          "texto": "documentos",
+          "tipo": "DOC"
+        },
+        {
+          "texto": "root",
+          "tipo": "ROL"
+        }
+      ]
+    },
+    "050": {
+      "tipo": "N",
+      "texto": "como ubico la seccion de documentos en el sistema",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "como ubicar la seccion de documentos",
+      "entidades": []
+    },
+    "051": {
+      "tipo": "S",
+      "texto": "descargame los documentos del cliente externo ABC Corp",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar documentos del cliente externo ABC Corp",
+      "entidades": [
+        {
+          "texto": "documentos",
+          "tipo": "DOC"
+        },
+        {
+          "texto": "ABC Corp",
+          "tipo": "ORG"
+        }
+      ]
+    },
+    "052": {
+      "tipo": "S",
+      "texto": "listar todos los archivos disponibles en el sistema",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar todos los archivos disponibles",
+      "entidades": [
+        {
+          "texto": "archivos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "053": {
+      "tipo": "N",
+      "texto": "donde esta la opcion para descargar archivos",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "donde esta la opcion para descargar archivos",
+      "entidades": []
+    },
+    "054": {
+      "tipo": "S",
+      "texto": "descargame los documentos asociados a facturacion urgenteeeee!!!",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar documentos asociados a facturacion",
+      "entidades": [
+        {
+          "texto": "documentos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "055": {
+      "tipo": "S",
+      "texto": "lista documentos con fechas entre enero y marzo del 2026",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar documentos entre 2026-01 y 2026-03",
+      "entidades": [
+        {
+          "texto": "documentos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "056": {
+      "tipo": "N",
+      "texto": "como puedo listar documentos dentro del sistema",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "como listar documentos en el sistema",
+      "entidades": []
+    },
+    "057": {
+      "tipo": "S",
+      "texto": "descargar los archivos generados hoy mismo, porfis $$$",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar archivos generados hoy",
+      "entidades": [
+        {
+          "texto": "archivos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "058": {
+      "tipo": "S",
+      "texto": "mostrar todos los documentos relacionados con contratos",
+      "estado": "D",
+      "intencion": "LD",
+      "texto_limpio": "listar documentos relacionados con contratos",
+      "entidades": [
+        {
+          "texto": "documentos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "059": {
+      "tipo": "N",
+      "texto": "en que menu se encuentran los documentos del sistema",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "en que menu se encuentran los documentos",
+      "entidades": []
+    },
+    "060": {
+      "tipo": "S",
+      "texto": "descargame los documentos de auditoria interna del 20233 yaaa!!!",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar documentos de auditoria interna del 2023",
+      "entidades": [
+        {
+          "texto": "documentos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "061": {
+      "tipo": "S",
+      "texto": "por favor descargar los archivos generados hoy mismo, porfis $$$ ya",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar archivos generados hoy",
+      "entidades": [
+        {
+          "texto": "archivos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "062": {
+      "tipo": "S",
+      "texto": "por favor quiero bajar los contratos firmados en marzo del 2026 por favor",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar contratos firmados en 2026-03",
+      "entidades": [
+        {
+          "texto": "contratos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "063": {
+      "tipo": "S",
+      "texto": "quisiera descargar los archivos cargados en febrero del 2025 #$% rapido",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar archivos cargados en 2025-02",
+      "entidades": [
+        {
+          "texto": "archivos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "064": {
+      "tipo": "S",
+      "texto": "podrias descargame los documentos asociados a facturacion urgenteeeee!!!",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar documentos asociados a facturacion",
+      "entidades": [
+        {
+          "texto": "documentos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "065": {
+      "tipo": "S",
+      "texto": "descárgame el documento de identidad del usuario Pedro Torres",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar documento de identidad del usuario Pedro Torres",
+      "entidades": [
+        {
+          "texto": "documento de identidad",
+          "tipo": "DOC"
+        },
+        {
+          "texto": "Pedro Torres",
+          "tipo": "PER"
+        }
+      ]
+    },
+    "066": {
+      "tipo": "S",
+      "texto": "necesito que quiero bajar los contratos firmados en marzo del 2026 rapido",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar contratos firmados en 2026-03",
+      "entidades": [
+        {
+          "texto": "contratos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "067": {
+      "tipo": "S",
+      "texto": "podrias bajame los documentostostostostos ==....=== del usuario Carla Ruiz del dia de hoy en pantalla",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar documentos del usuario Carla Ruiz del dia de hoy",
+      "entidades": [
+        {
+          "texto": "documentos",
+          "tipo": "DOC"
+        },
+        {
+          "texto": "Carla Ruiz",
+          "tipo": "PER"
+        }
+      ]
+    },
+    "068": {
+      "tipo": "S",
+      "texto": "quisiera descargar los archivos cargados en febrero del 2025 #$% ahora mismo",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar archivos cargados en 2025-02",
+      "entidades": [
+        {
+          "texto": "archivos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "069": {
+      "tipo": "S",
+      "texto": "devuelveme el documento de identificación del usuario Juan Ramirez rapido",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar documento de identificacion del usuario Juan Ramirez",
+      "entidades": [
+        {
+          "texto": "documento de identificacion",
+          "tipo": "DOC"
+        },
+        {
+          "texto": "Juan Ramirez",
+          "tipo": "PER"
+        }
+      ]
+    },
+    "070": {
+      "tipo": "S",
+      "texto": "bajame los documentostostostostos ==....=== del usuario Carla Ruiz del dia de hoy ahora mismo",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar documentos del usuario Carla Ruiz del dia de hoy",
+      "entidades": [
+        {
+          "texto": "documentos",
+          "tipo": "DOC"
+        },
+        {
+          "texto": "Carla Ruiz",
+          "tipo": "PER"
+        }
+      ]
+    },
+    "071": {
+      "tipo": "S",
+      "texto": "descargar los archivos generados hoy mismo, porfis $$$",
+      "estado": "D",
+      "intencion": "DD",
+      "texto_limpio": "descargar archivos generados hoy",
+      "entidades": [
+        {
+          "texto": "archivos",
+          "tipo": "DOC"
+        }
+      ]
+    },
+    "072": {
+      "tipo": "N",
+      "texto": "quisiera como navegar entre los modulos del sistema documental ahora mismo",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "como navegar entre los modulos del sistema documental",
+      "entidades": []
+    },
+    "073": {
+      "tipo": "N",
+      "texto": "por favor donde se encuentra la opcion para ver reportes documentales por favor",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "donde ver reportes documentales",
+      "entidades": []
+    },
+    "074": {
+      "tipo": "N",
+      "texto": "podrias en que menu se encuentran los documentos del sistema por favor",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "en que menu se encuentran los documentos",
+      "entidades": []
+    },
+    "075": {
+      "tipo": "N",
+      "texto": "por favor como puedo descargar documentos desde la plataforma?",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "como descargar documentos desde la plataforma",
+      "entidades": []
+    },
+    "076": {
+      "tipo": "N",
+      "texto": "podrias en que parte del sistema esta la opción de cargar documentos? por favor",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "donde esta la opcion de cargar documentos",
+      "entidades": []
+    },
+    "077": {
+      "tipo": "N",
+      "texto": "quisiera como ubico la seccion de documentos en el sistema en pantalla",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "como ubicar la seccion de documentos",
+      "entidades": []
+    },
+    "078": {
+      "tipo": "N",
+      "texto": "donde puedo ver los documentos cargados en el sistema en pantalla",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "donde ver documentos cargados en el sistema",
+      "entidades": []
+    },
+    "079": {
+      "tipo": "N",
+      "texto": "en que sección se descargan los archivos del sistema",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "donde descargar archivos en el sistema",
+      "entidades": []
+    },
+    "080": {
+      "tipo": "N",
+      "texto": "muestrame en donde puedo encontrar los documentos confidenciales en pantalla",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "donde encontrar documentos confidenciales",
+      "entidades": []
+    },
+    "081": {
+      "tipo": "N",
+      "texto": "necesito que como se accede al historial de documentos en el sistema rapido",
+      "estado": "D",
+      "intencion": "N",
+      "texto_limpio": "como acceder al historial de documentos",
+      "entidades": []
+    }
+  }
+}
