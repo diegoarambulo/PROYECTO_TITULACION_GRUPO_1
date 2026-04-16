@@ -1,0 +1,68 @@
+[
+	{
+		"Id" : "004",
+		"informal": {
+			"texto" : "dame los expedientes cargados el dia de ayer",
+			"intencion" : "Listar Documentos"
+		},
+		"formal" : {
+			"texto" : "Hola, necesito me facilites los documentos que fueron cargados al sistema solo el dia de ayer.",
+			"intencion" : ""
+		}
+	},
+	{
+		"Id" : "005",
+		"informal": {
+			"texto" : "en que parte del sistema esta la opción de cargar documentos?",
+			"intencion" : "Navegación"
+		},
+		"formal" : {
+			"texto" : "Donde podria yo encontrar la sección especifica del sistema que me permita realizar la carga de un documento?",
+			"intencion" : ""
+		}
+	},
+	{
+		"Id" : "009",
+		"informal": {
+			"texto" : "quiero los documentos de Carlos Mendoza",
+			"intencion" : ""
+		},
+		"formal" : {
+			"texto" : "muéstrame todos los documentos asociados al usuario Carlos Mendoza",
+			"intencion" : "Listar Documentos"
+		}
+	},
+	{
+		"Id" : "017",
+		"informal": {
+			"texto" : "dame la cedula de Pedro Torres",
+			"intencion" : ""
+		},
+		"formal" : {
+			"texto" : "descargar documento de identidad del usuario Pedro Torres",
+			"intencion" : "Descarga de documento"
+		}
+	},
+	{
+		"Id" : "018",
+		"informal": {
+			"texto" : "descargar contratos firmados en 2026-03",
+			"intencion" : "Descarga de documento"
+		},
+		"formal" : {
+			"texto" : "necesito todos los contratos firmados en el mes de marzo del año 2026, para descargar",
+			"intencion" : ""
+		}
+	},
+	{
+		"Id" : "032",
+		"informal": {
+			"texto" : "donde encuentro los documentos eliminado?",
+			"intencion" : "Navegación"
+		},
+		"formal" : {
+			"texto" : "en que parte del sistema podria yo encontrar la seccion de documentos eliminados?",
+			"intencion" : ""
+		}
+	}
+]
