@@ -1,0 +1,6 @@
+
+Para el ASR no, porque el proveedor ya tuvo que haber hecho esa tarea, para el RAG tampoco, para el NLP (las intenciones) si. Investigar cuáles serían los hiperparámetro típicos y sobre ellos analiza su sensibilidad. Recomiendo variar un hiperparámetro a la vez y documentar resultados.
+
+
+
+Saludos.

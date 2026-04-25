@@ -1,0 +1,8 @@
+la informacion, como: 
+
+El dataset Noise_Test_Module1.csv
+Carpeta de audios
+Manuales sucios y complementarios
+
+
+estan dentro de la carpeta data y deberan ser cargados al contexto del colab para correr el pipeline
